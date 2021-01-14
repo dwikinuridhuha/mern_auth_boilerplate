@@ -96,16 +96,34 @@ router.delete('/delete', auth, async (req, res) => {
     try {
         const deletedUser = await User.findByIdAndDelete(req.user);
         res.json(deletedUser);
-    } catch (err) {
-        res.status(500).json({error: err.message});
+    } catch (e) {
+        res.status(500).json({error: e.message});
     }
 });
 
-router.post('/tokenIsValid', auth, async (req, res) => {
-    const user = await User.findById(req.user);
-    if (!user) return res.json(false);
+router.post('/tokenIsValid', async (req, res) => {
+    try {
+        const token = req.header("x-auth-token");
+        if (!token) return res.json(false);
 
-    return res.json(true);
+        const verified = jwt.verify(token, process.env.JWT_SECRET);
+        if (!verified) return res.json(false);
+
+        const user = await User.findById(verified.id);
+        if (!user) return res.json(false);
+
+        return res.json(true);
+    } catch (e) {
+        res.status(500).json({error: e.message});
+    }
+});
+
+router.get("/", auth, async (req, res) => {
+   const user = await User.findById(req.user);
+   res.json({
+       displayName: user.displayName,
+       id: user._id
+   })
 });
 
 module.exports = router;
