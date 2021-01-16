@@ -29,3 +29,4 @@ mongoose.connect(process.env.MONGODB_CONNECTION_STR, {
 });
 
 app.use('/users', require('./routes/userRoutes'));
+app.use('/todos', require('./routes/todoRouter'));
