@@ -1,7 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-
 /* reset */
-
 * {
   margin: 0;
   padding: 0;
@@ -43,7 +40,7 @@ li {
 /* general */
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: Roboto, sans-serif;
 }
 
 .page {
@@ -78,6 +75,7 @@ body {
   background-color: #b91b1b;
   color: #ffffff;
   font-size: 1.1rem;
+  height: 100%;
 }
 #header .auth-options button:hover {
   background-color: #be3a3a;
@@ -99,7 +97,7 @@ body {
 .form input[type="email"],
 .form input[type="password"] {
   width: 100%;
-  padding: 0.3rem;
+  padding: 0.8rem;
   border: 1px solid #c2c2c2;
   border-radius: 8px;
   background-color: #f0f0f0;
